@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Product from "../components/product";
+import Product from "../components/productItem";
 
 const iconShipping = require("../assets/ic_shipping@2x.png");
 

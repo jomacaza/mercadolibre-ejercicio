@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const iconShipping = require("../assets/ic_shipping@2x.png");
 
-function product({ ...props }) {
+function productItem({ ...props }) {
   const { price, location, description, thumb } = props;
   const thumbStyle = {
     backgroundImage: `url(${thumb})`,
@@ -33,14 +33,14 @@ function product({ ...props }) {
   );
 }
 
-product.defaultProps = {
+productItem.defaultProps = {
   price: 0
 };
 
-product.propTypes = {
+productItem.propTypes = {
   price: PropTypes.number,
   location: PropTypes.string,
   description: PropTypes.string
 };
 
-export default product;
+export default productItem;

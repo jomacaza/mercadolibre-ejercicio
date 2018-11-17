@@ -49,3 +49,40 @@
 		}
 	}
 }
+
+.product-detail {
+	padding: rem-calc(16);
+
+	.thumbnail {
+		width: 100%;
+		height: auto
+	}
+
+	.product-detail-label {
+		font-size: rem-calc(14)
+	}
+
+	.product-detail-title {
+		font-size: rem-calc(24);
+		font-weight: bold;
+		padding: rem-calc(16) 0
+	}
+
+	.product-detail-price {
+		font-size: rem-calc(46);
+		padding: rem-calc(16) 0
+	}
+
+	.product-detail-description-label {
+		margin: rem-calc(32) 0
+	}
+
+	.product-detail-description {
+		color: $gray-200
+	}
+
+	.btn {
+		width: 100%;
+		margin: rem-calc(16) 0
+	}
+}
