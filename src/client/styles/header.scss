@@ -1,0 +1,14 @@
+.header {
+	background: $yellow;
+	height: 50px;
+
+	.container {
+		height: 100%;
+		display: flex;
+		align-items: center
+	}
+
+	.logo {
+		margin-right: 30px
+	}
+}

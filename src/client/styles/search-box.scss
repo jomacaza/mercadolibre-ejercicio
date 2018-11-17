@@ -1,0 +1,25 @@
+$inputHeight: 35px;
+
+.search-box {
+	width: 100%;
+	display: flex;
+	align-items: center;
+
+	input {
+		width: 100%;
+		height: $inputHeight;
+		border-color: transparent;
+		border-radius: $border-radius 0 0 $border-radius;
+		padding: rem-calc(15);
+
+		@include placeholder {
+			font-size: rem-calc(18);
+			color: $gray-200
+		}
+	}
+
+	.btn {
+		height: $inputHeight;
+		border-radius: 0 $border-radius $border-radius 0;
+	}
+}

@@ -1,0 +1,44 @@
+body {
+	font-size: #{$baseSize}px;
+	background: $gray-100;
+	font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+	color: $dark;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: rem-calc(42);
+}
+
+h3 {
+	font-size: rem-calc(28);
+}
+
+h4 {
+	font-size: rem-calc(24);
+}
+
+h5 {
+	font-size: rem-calc(18);
+}
+
+h6 {
+	font-size: rem-calc(14);
+}
+
+p {
+	font-size: rem-cal(16);
+}
+
+small {
+	font-size: rem-calc(12)
+}

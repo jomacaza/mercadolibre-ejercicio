@@ -1,0 +1,21 @@
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	background: $gray-100;
+    border: 1px solid transparent;
+    padding: rem-calc(6) rem-calc(12);
+    font-size: rem-calc(16);
+    line-height: 1.5;
+    border-radius: $border-radius;
+
+	&:hover {
+		background: darken($gray-100, 10%);
+	}
+}
