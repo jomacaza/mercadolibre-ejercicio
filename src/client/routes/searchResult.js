@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Product from "../components/productItem";
 import queryString from "query-string";
+import Product from "../components/productItem";
+import Breadcrumb from "../components/breadcrumb";
 
 const iconShipping = require("../assets/ic_shipping@2x.png");
 
@@ -42,7 +43,8 @@ class searchResult extends Component {
   }
 
   render() {
-    const products = this.state.result.items.map((product, key) => {
+    const { items, categories } = this.state.result;
+    const products = items.map((product, key) => {
       const { id, title, price, location, picture, free_shipping } = product;
 
       return (
@@ -58,11 +60,9 @@ class searchResult extends Component {
       );
     });
 
-    console.log(this.state.result);
-
     return (
       <div>
-        <div className="breadcrumb">test 1 > test 2</div>
+        <Breadcrumb items={categories} />
         <div className="card">
           <div className="product-list">{products}</div>
         </div>

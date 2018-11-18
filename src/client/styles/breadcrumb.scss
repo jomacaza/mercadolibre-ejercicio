@@ -1,5 +1,24 @@
 .breadcrumb {
 	padding: rem-calc(16) 0;
 	font-size: rem-calc(14);
-	color: $gray-200
+	color: $gray-200;
+
+	.breadcrumb-item {
+		display: inline-block;
+		color: $gray-200;
+
+		a {
+			color: $gray-200;
+		}
+
+		span {
+			margin: 0 rem-calc(5);
+		}
+
+		&:last-child {
+			span {
+				display: none
+			}
+		}
+	}
 }

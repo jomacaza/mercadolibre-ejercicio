@@ -42,3 +42,12 @@ p {
 small {
 	font-size: rem-calc(12)
 }
+
+a {
+	color: $gray-300;
+	text-decoration: none;
+
+	&:hover {
+		color: $dark
+	}
+}
