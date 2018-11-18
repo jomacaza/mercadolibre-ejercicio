@@ -4,11 +4,14 @@ import PropTypes from "prop-types";
 const iconShipping = require("../assets/ic_shipping@2x.png");
 
 function productItem({ ...props }) {
-  const { price, location, description, thumb } = props;
+  const { id, price, location, title, picture, hasShipping } = props;
   const thumbStyle = {
-    backgroundImage: `url(${thumb})`,
+    backgroundImage: `url(${picture})`,
     backgroundSize: "cover"
   };
+  const shipping = hasShipping ? (
+    <img src={iconShipping} className="icon-shipping" alt="shipping icon" />
+  ) : null;
 
   return (
     <div className="product">
@@ -16,18 +19,16 @@ function productItem({ ...props }) {
       <div class="product-info">
         <div class="product-header row">
           <div className="col-9">
-            <div className="product-title">$ {price}</div>
-            <img
-              src={iconShipping}
-              className="icon-shipping"
-              alt="shipping icon"
-            />
+            <div className="product-price">$ {price}</div>
+            {shipping}
           </div>
           <div class="col-3">
             <div class="product-location">{location}</div>
           </div>
         </div>
-        <div className="product-description">{description}</div>
+        <a className="product-title" href={`#/items/${id}`}>
+          {title}
+        </a>
       </div>
     </div>
   );
@@ -38,9 +39,12 @@ productItem.defaultProps = {
 };
 
 productItem.propTypes = {
+  id: PropTypes.string,
   price: PropTypes.number,
   location: PropTypes.string,
-  description: PropTypes.string
+  title: PropTypes.string,
+  picture: PropTypes.string,
+  hasShipping: PropTypes.bool
 };
 
 export default productItem;

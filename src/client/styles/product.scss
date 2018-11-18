@@ -26,14 +26,20 @@
 			padding-bottom: rem-calc(32);
 		}
 
-		.product-title {
+		.product-price {
 			display: inline-block;
 			font-size: rem-calc(24);
 			margin-right: auto;
 		}
 
-		.product-description {
-			font-size: rem-calc(18)
+		.product-title {
+			font-size: rem-calc(18);
+			color: $gray-300;
+			text-decoration: none;
+
+			&:hover {
+				color: $dark
+			}
 		}
 
 		.product-location {
