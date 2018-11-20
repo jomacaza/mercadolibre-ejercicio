@@ -4,6 +4,7 @@ import queryString from "query-string";
 import ProductList from "../components/productList";
 import Breadcrumb from "../components/breadcrumb";
 import Spinner from "../components/spinner";
+import { author } from "../constants";
 
 const iconShipping = require("../assets/ic_shipping@2x.png");
 
@@ -39,7 +40,9 @@ class searchResult extends Component {
 
     this.setState({ pending: true });
 
-    fetch(`api/items?search=${search}`)
+    fetch(`api/items?search=${search}`, {
+      headers: { author: JSON.stringify(author) }
+    })
       .then(response => response.json())
       .then(response => {
         this.setState({ result: response, pending: false });

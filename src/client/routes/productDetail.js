@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Detail from "../components/productDetail";
 import Breadcrumb from "../components/breadcrumb";
 import Spinner from "../components/spinner";
+import { author } from "../constants";
 
 class productDetail extends Component {
   static propTypes = {
@@ -26,10 +27,12 @@ class productDetail extends Component {
   _getProductDetail(id) {
     this.setState({ pending: true });
 
-    fetch(`api/items/${id}`)
+    fetch(`api/items/${id}`, {
+      headers: { author: JSON.stringify(author) }
+    })
       .then(response => response.json())
       .then(response => {
-        this.setState({ ...response, pending: false });
+        this.setState({ ...response.item, pending: false });
       })
       .catch(reject => {
         console.log(reject);

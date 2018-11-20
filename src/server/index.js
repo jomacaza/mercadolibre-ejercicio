@@ -5,8 +5,12 @@ const fetch = require("node-fetch");
 const app = express();
 
 app.use(express.static("dist"));
+
 app.get("/api/items", async (req, res) => {
   const { search } = req.query;
+  const author = req.get("author");
+
+  console.log(author);
 
   try {
     const response = await fetch(
@@ -42,6 +46,7 @@ app.get("/api/items", async (req, res) => {
     });
 
     res.send({
+      author: JSON.parse(author),
       categories: category[0] ? category[0].values[0].path_from_root : [],
       items: resultMapped
     });
@@ -50,12 +55,14 @@ app.get("/api/items", async (req, res) => {
     res.status(500).send(reject);
   }
 });
+
 app.get("/api/items/:id", async (req, res) => {
+  const author = req.get("author");
+
   try {
     const response = await fetch(
       `https://api.mercadolibre.com/items/${req.params.id}`
     ).then(response => response.json());
-    // const category = response.filters.filter(f => f.id === "category");
     const {
       id,
       title,
@@ -76,23 +83,26 @@ app.get("/api/items/:id", async (req, res) => {
     ).then(response => response.json());
 
     res.send({
-      // categories: category[0] ? category[0].values[0].path_from_root : [],
-      id,
-      title,
-      condition,
-      price: {
-        amount: price,
-        currency: currency_id
-      },
-      picture: pictures[0].url,
-      sold_quantity,
-      free_shipping: shipping.free_shipping,
-      description,
-      categories: category.path_from_root
+      author: JSON.parse(author),
+      item: {
+        id,
+        title,
+        condition,
+        price: {
+          amount: price,
+          currency: currency_id
+        },
+        picture: pictures[0].url,
+        sold_quantity,
+        free_shipping: shipping.free_shipping,
+        description,
+        categories: category.path_from_root
+      }
     });
   } catch (reject) {
     console.log(reject);
     res.status(500).send(reject);
   }
 });
+
 app.listen(8080, () => console.log("Listening on port 8080!"));
