@@ -31,7 +31,9 @@ class searchBox extends Component {
     return (
       <header className="header">
         <div className="container">
-          <img className="logo" src={logo} alt="logo" />
+          <a href="#/">
+            <img className="logo" src={logo} alt="logo" />
+          </a>
 
           <SearchBox
             onChange={this._handlerSearchChange.bind(this)}
