@@ -1,4 +1,6 @@
 .product-list {
+	width: 100%;
+
 	.product {
 		display: flex;
 		align-items: flex-start;
@@ -109,4 +111,12 @@
 		width: 100%;
 		margin: rem-calc(16) 0
 	}
+}
+
+.product-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: rem-calc(500);
+	margin-bottom: rem-calc(32)
 }

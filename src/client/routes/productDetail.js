@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Detail from "../components/productDetail";
 import Breadcrumb from "../components/breadcrumb";
+import Spinner from "../components/spinner";
 
 class productDetail extends Component {
   static propTypes = {
@@ -12,7 +13,9 @@ class productDetail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      pending: false
+    };
   }
 
   componentWillMount() {
@@ -21,10 +24,16 @@ class productDetail extends Component {
   }
 
   _getProductDetail(id) {
+    this.setState({ pending: true });
+
     fetch(`api/items/${id}`)
       .then(response => response.json())
       .then(response => {
-        this.setState({ ...response });
+        this.setState({ ...response, pending: false });
+      })
+      .catch(reject => {
+        console.log(reject);
+        this.setState({ pending: false });
       });
   }
 
@@ -36,21 +45,26 @@ class productDetail extends Component {
       description = { plain_text: "" },
       condition,
       sold_quantity,
-      categories
+      categories,
+      pending
     } = this.state;
 
     return (
       <div>
         <Breadcrumb items={categories} />
-        <div className="card">
-          <Detail
-            thumb={picture}
-            title={title}
-            price={price.amount}
-            description={description.plain_text}
-            condition={condition}
-            soldQuantity={sold_quantity}
-          />
+        <div className="card product-container">
+          {pending ? (
+            <Spinner />
+          ) : (
+            <Detail
+              thumb={picture}
+              title={title}
+              price={price.amount}
+              description={description.plain_text}
+              condition={condition}
+              soldQuantity={sold_quantity}
+            />
+          )}
         </div>
       </div>
     );

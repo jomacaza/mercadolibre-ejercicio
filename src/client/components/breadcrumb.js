@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 function breadcrumb({ ...props }) {
   const { items } = props;
-  const links = items.map(item => {
+  const links = items.map((item, key) => {
     return (
-      <div className="breadcrumb-item">
+      <div key={`breadcrumb-${key}`} className="breadcrumb-item">
         <a href={`#/items?search=${item.name}`}>{item.name}</a>
         <span>></span>
       </div>

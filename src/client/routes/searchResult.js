@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import queryString from "query-string";
 import Product from "../components/productItem";
 import Breadcrumb from "../components/breadcrumb";
+import Spinner from "../components/spinner";
 
 const iconShipping = require("../assets/ic_shipping@2x.png");
 
@@ -18,7 +19,8 @@ class searchResult extends Component {
     this.state = {
       result: {
         items: []
-      }
+      },
+      pending: false
     };
   }
 
@@ -35,15 +37,22 @@ class searchResult extends Component {
   _getProducts(params) {
     const { search } = queryString.parse(params);
 
+    this.setState({ pending: true });
+
     fetch(`api/items?search=${search}`)
       .then(response => response.json())
       .then(response => {
-        this.setState({ result: response });
+        this.setState({ result: response, pending: false });
+      })
+      .catch(reject => {
+        console.log(reject);
+        this.setState({ pending: false });
       });
   }
 
   render() {
     const { items, categories } = this.state.result;
+    const { pending } = this.state;
     const products = items.map((product, key) => {
       const { id, title, price, location, picture, free_shipping } = product;
 
@@ -63,8 +72,12 @@ class searchResult extends Component {
     return (
       <div>
         <Breadcrumb items={categories} />
-        <div className="card">
-          <div className="product-list">{products}</div>
+        <div className="card product-container">
+          {pending ? (
+            <Spinner />
+          ) : (
+            <div className="product-list">{products}</div>
+          )}
         </div>
       </div>
     );

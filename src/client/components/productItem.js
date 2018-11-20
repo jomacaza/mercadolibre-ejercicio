@@ -19,8 +19,8 @@ function productItem({ ...props }) {
   return (
     <div className="product">
       <div className="thumbnail" style={thumbStyle} />
-      <div class="product-info">
-        <div class="product-header row">
+      <div className="product-info">
+        <div className="product-header row">
           <div className="col-9">
             <div className="product-price">
               <span>$ {priceWithSeparator}</span>
@@ -28,8 +28,8 @@ function productItem({ ...props }) {
             </div>
             {shipping}
           </div>
-          <div class="col-3">
-            <div class="product-location">{location}</div>
+          <div className="col-3">
+            <div className="product-location">{location}</div>
           </div>
         </div>
         <a className="product-title" href={`#/items/${id}`}>
