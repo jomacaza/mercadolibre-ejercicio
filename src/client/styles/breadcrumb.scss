@@ -16,8 +16,15 @@
 		}
 
 		&:last-child {
+			color: $gray-300;
+			font-weight: bold;
+
 			span {
 				display: none
+			}
+
+			a:hover {
+				color: $gray-300
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Detail from "../components/productDetail";
+import Breadcrumb from "../components/breadcrumb";
 
 class productDetail extends Component {
   static propTypes = {
@@ -11,31 +12,44 @@ class productDetail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      title: "Deco Reverse Sombrero Oxford",
-      description: `
-                  Dolor recusandae dolores facere corporis eaque! Voluptas fuga
-                  impedit ea suscipit odit Modi illo quibusdam officiis nobis
-                  aspernatur ea? Veniam placeat ipsa quibusdam aspernatur omnis
-                  exercitationem? Voluptates reprehenderit saepe possimus.
-				`,
-      price: 1980,
-      thumb: "https://i.ytimg.com/vi/RW5a6D-O-i8/maxresdefault.jpg"
-    };
+    this.state = {};
+  }
+
+  componentWillMount() {
+    const { id } = this.props.match.params;
+    this._getProductDetail(id);
+  }
+
+  _getProductDetail(id) {
+    fetch(`api/items/${id}`)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({ ...response });
+      });
   }
 
   render() {
-    const { thumb, title, price, description } = this.state;
+    const {
+      picture,
+      title,
+      price = { amount: 0 },
+      description = { plain_text: "" },
+      condition,
+      sold_quantity,
+      categories
+    } = this.state;
 
     return (
       <div>
-        <div className="breadcrumb">test 1 > test 2</div>
+        <Breadcrumb items={categories} />
         <div className="card">
           <Detail
-            thumb={thumb}
+            thumb={picture}
             title={title}
-            price={price}
-            description={description}
+            price={price.amount}
+            description={description.plain_text}
+            condition={condition}
+            soldQuantity={sold_quantity}
           />
         </div>
       </div>

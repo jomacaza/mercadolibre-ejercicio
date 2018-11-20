@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { thousandsSeparator } from "../utilities";
 
 const iconShipping = require("../assets/ic_shipping@2x.png");
 
@@ -12,6 +13,8 @@ function productItem({ ...props }) {
   const shipping = hasShipping ? (
     <img src={iconShipping} className="icon-shipping" alt="shipping icon" />
   ) : null;
+  const split_price = price.toString().split(".");
+  const priceWithSeparator = thousandsSeparator(split_price[0]);
 
   return (
     <div className="product">
@@ -19,7 +22,10 @@ function productItem({ ...props }) {
       <div class="product-info">
         <div class="product-header row">
           <div className="col-9">
-            <div className="product-price">$ {price}</div>
+            <div className="product-price">
+              <span>$ {priceWithSeparator}</span>
+              <span className="product-price-decimal">{split_price[1]}</span>
+            </div>
             {shipping}
           </div>
           <div class="col-3">

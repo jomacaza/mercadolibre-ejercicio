@@ -23,7 +23,6 @@ app.get("/api/items", async (req, res) => {
         shipping,
         thumbnail,
         currency_id,
-        sold_quantity,
         address,
         category_id
       } = product;
@@ -51,7 +50,49 @@ app.get("/api/items", async (req, res) => {
     res.status(500).send(reject);
   }
 });
-app.get("/api/items/:id", (req, res) =>
-  res.send({ username: os.userInfo().username })
-);
+app.get("/api/items/:id", async (req, res) => {
+  try {
+    const response = await fetch(
+      `https://api.mercadolibre.com/items/${req.params.id}`
+    ).then(response => response.json());
+    // const category = response.filters.filter(f => f.id === "category");
+    const {
+      id,
+      title,
+      price,
+      condition,
+      shipping,
+      pictures,
+      currency_id,
+      sold_quantity,
+      address,
+      category_id
+    } = response;
+    const description = await fetch(
+      `https://api.mercadolibre.com/items/${req.params.id}/description`
+    ).then(response => response.json());
+    const category = await fetch(
+      `https://api.mercadolibre.com/categories/${category_id}`
+    ).then(response => response.json());
+
+    res.send({
+      // categories: category[0] ? category[0].values[0].path_from_root : [],
+      id,
+      title,
+      condition,
+      price: {
+        amount: price,
+        currency: currency_id
+      },
+      picture: pictures[0].url,
+      sold_quantity,
+      free_shipping: shipping.free_shipping,
+      description,
+      categories: category.path_from_root
+    });
+  } catch (reject) {
+    console.log(reject);
+    res.status(500).send(reject);
+  }
+});
 app.listen(8080, () => console.log("Listening on port 8080!"));

@@ -32,6 +32,14 @@
 			margin-right: auto;
 		}
 
+		.product-price-decimal {
+			display: inline-block;
+			font-size: rem-calc(16);
+			margin-left: rem-calc(5);
+			vertical-align: top;
+			margin-top: rem-calc(2)
+		}
+
 		.product-title {
 			font-size: rem-calc(18);
 			color: $gray-300;
@@ -75,8 +83,16 @@
 	}
 
 	.product-detail-price {
+		display: flex;
+		align-items: flex-start;
 		font-size: rem-calc(46);
-		padding: rem-calc(16) 0
+		padding: rem-calc(16) 0;
+	}
+
+	.product-detail-price-decimal {
+		font-size: rem-calc(16);
+		margin-top: rem-calc(7);
+		margin-bottom: rem-calc(5)
 	}
 
 	.product-detail-description-label {
@@ -84,7 +100,8 @@
 	}
 
 	.product-detail-description {
-		color: $gray-200
+		color: $gray-200;
+
 	}
 
 	.btn {
