@@ -10,8 +10,6 @@ app.get("/api/items", async (req, res) => {
   const { search } = req.query;
   const author = req.get("author");
 
-  console.log(author);
-
   try {
     const response = await fetch(
       `https://api.mercadolibre.com/sites/MLA/search?q=${search}`
