@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
-import Product from "../components/productItem";
+import ProductList from "../components/productList";
 import Breadcrumb from "../components/breadcrumb";
 import Spinner from "../components/spinner";
 
@@ -53,31 +53,12 @@ class searchResult extends Component {
   render() {
     const { items, categories } = this.state.result;
     const { pending } = this.state;
-    const products = items.map((product, key) => {
-      const { id, title, price, location, picture, free_shipping } = product;
-
-      return (
-        <Product
-          key={`product-${key}`}
-          id={id}
-          price={price.amount}
-          title={title}
-          location={location}
-          picture={picture}
-          hasShipping={free_shipping}
-        />
-      );
-    });
 
     return (
       <div>
         <Breadcrumb items={categories} />
         <div className="card product-container">
-          {pending ? (
-            <Spinner />
-          ) : (
-            <div className="product-list">{products}</div>
-          )}
+          {pending ? <Spinner /> : <ProductList items={items} />}
         </div>
       </div>
     );
